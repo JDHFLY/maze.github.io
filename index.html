@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8"> <!-- Ôö¼Ó×Ö·û±àÂëÉùÃ÷ -->
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <style>
         #stage {
             border: 1px solid lightgray;
@@ -24,11 +24,11 @@
           <td><canvas id="stage"></canvas></td>
           <td valign="top" style="padding:10px"> 
           
-              <div class="rebuild">ÃÔ¹¬Éú³É</div>  
-              ÒÆ¶¯²½Êı: <span id="goNum"></span> 
-              <br><br>µ±Ç°Î»ÖÃ <span id="XY">(x: 1,y: 1)</span>
+              <div class="rebuild">è¿·å®«ç”Ÿæˆ</div>  
+              ç§»åŠ¨æ­¥æ•°: <span id="goNum"></span> 
+              <br><br>å½“å‰ä½ç½® <span id="XY">(x: 1,y: 1)</span>
               
-              <br><br><input id="runBtn" type="button" value="×Ô¶¯Ñ°Â·">
+              <br><br><input id="runBtn" type="button" value="è‡ªåŠ¨å¯»è·¯">
               <br><br><div id="autoOut"></div>
           </td></tr></table>
     </body>
@@ -41,7 +41,7 @@
         stage.width = si * (mapSize * 2 - 1);
         stage.height = si * (mapSize * 2 - 1);
         
-        // Éú³ÉËæ»úÕûÊı
+        // ç”Ÿæˆéšæœºæ•´æ•°
         function randInt(min, max) {
             max = max || 0;
             min = min || 0;
@@ -52,9 +52,9 @@
             return result;
         }
         
-        // Éú³É Prim Ëã·¨ÃÔ¹¬
+        // ç”Ÿæˆ Prim ç®—æ³•è¿·å®«
         function primMaze(r, c) {
-            // ³õÊ¼»¯ÃÔ¹¬Êı×é
+            // åˆå§‹åŒ–è¿·å®«æ•°ç»„
             function init(r, c) {
                 var a = new Array(2 * r + 1);
                 for (let i = 0, len = a.length; i < len; i++) {
@@ -72,7 +72,7 @@
                 return a;
             }
 
-            // ´¦ÀíÃÔ¹¬Éú³É
+            // å¤„ç†è¿·å®«ç”Ÿæˆ
             function process(arr) {
                 var acc = [],
                     noacc = [];
@@ -122,7 +122,7 @@
             return a;
         }
         
-        // »æÖÆÍø¸ñ
+        // ç»˜åˆ¶ç½‘æ ¼
         function drawGrid(context, color, stepx, stepy) {
             context.strokeStyle = color;
             context.lineWidth = 0.5;
@@ -147,7 +147,7 @@
             ctx.fill();
         }
 
-        var region = 0; // ¿ÉĞĞ×ßÇøÓò¼ÆÊı
+        var region = 0; // å¯è¡Œèµ°åŒºåŸŸè®¡æ•°
         function update() {
             ctx.clearRect(0, 0, mapSize * si * 2, mapSize * si * 2);
             drawGrid(ctx, 'lightgray', si, si);
@@ -196,7 +196,7 @@
         
         function moveIt(){
             if(!control)return;
-            var oxy = [currentXY[0],currentXY[1]]; // Ô­Ê¼Î»ÖÃ
+            var oxy = [currentXY[0],currentXY[1]]; // åŸå§‹ä½ç½®
             var moveIs = true;
             switch (event.keyCode){
               case 37: currentXY[0]--; break;  // left
@@ -204,20 +204,20 @@
               case 39: currentXY[0]++; break;  // right
               case 40: currentXY[1]++; break;  // down
             }
-            if(currentXY[0]>=md[0].length || currentXY[1]>=md.length){ // ±ß½ç¼ì²é
+            if(currentXY[0]>=md[0].length || currentXY[1]>=md.length){ // è¾¹ç•Œæ£€æŸ¥
                 clearMove(currentXY[0],currentXY[1]);
                 init();
                 return;
             }
-            if(md[currentXY[0]][currentXY[1]]==1){moveIs=false;}             // Ç½±Ú¼ì²é
+            if(md[currentXY[0]][currentXY[1]]==1){moveIs=false;}             // å¢™å£æ£€æŸ¥
             if(moveIs){
-                clearMove(oxy[0],oxy[1]);              // Çå³ıÔ­Î»ÖÃ
-                drawMove1(oxy[0],oxy[1]);              // ±ê¼ÇÒÑ×ß¹ı
-                if(md[currentXY[0]][currentXY[1]]==2){clearMove(onceXY[0],onceXY[1]);md[onceXY[0]][onceXY[1]]=0;} // ´¦Àí»ØËİ
-                drawMove(currentXY[0],currentXY[1]);   // »æÖÆĞÂÎ»ÖÃ
+                clearMove(oxy[0],oxy[1]);              // æ¸…é™¤åŸä½ç½®
+                drawMove1(oxy[0],oxy[1]);              // æ ‡è®°å·²èµ°è¿‡
+                if(md[currentXY[0]][currentXY[1]]==2){clearMove(onceXY[0],onceXY[1]);md[onceXY[0]][onceXY[1]]=0;} // å¤„ç†å›æº¯
+                drawMove(currentXY[0],currentXY[1]);   // ç»˜åˆ¶æ–°ä½ç½®
                 goNums++;
             }else{
-                currentXY=[oxy[0],oxy[1]]; // Î»ÖÃ»ØÍË
+                currentXY=[oxy[0],oxy[1]]; // ä½ç½®å›é€€
             }
             
             onceXY=[currentXY[0],currentXY[1]];
@@ -229,21 +229,21 @@
         document.onkeydown = moveIt;
         document.querySelector('.rebuild').addEventListener('click', init);
         
-        var pathList;        // Â·¾¶¼ÇÂ¼
-        var pathOkList;      // ³É¹¦Â·¾¶¼ÇÂ¼
-        var pathNode;        // µ±Ç°½ÚµãÂ·¾¶
+        var pathList;        // è·¯å¾„è®°å½•
+        var pathOkList;      // æˆåŠŸè·¯å¾„è®°å½•
+        var pathNode;        // å½“å‰èŠ‚ç‚¹è·¯å¾„
         var LukouList;
 
-        function endAuto(){  // Ñ°Â·½áÊø´¦Àí
-            var pathCount = pathOkList.length; // ³É¹¦Â·¾¶ÊıÁ¿
+        function endAuto(){  // å¯»è·¯ç»“æŸå¤„ç†
+            var pathCount = pathOkList.length; // æˆåŠŸè·¯å¾„æ•°é‡
             var pNum = region;
-            var zIndex = 0;  // ×î¶ÌÂ·¾¶Ë÷Òı
+            var zIndex = 0;  // æœ€çŸ­è·¯å¾„ç´¢å¼•
             for(var i=0;i<pathOkList.length;i++){
                if(pathOkList[i].length<pNum){pNum=pathOkList[i].length;zIndex=i;}
             }
             var zdPath = pathOkList[zIndex];
 
-            for(var j=0;j<zdPath.length;j++){       // »æÖÆ×î¶ÌÂ·¾¶
+            for(var j=0;j<zdPath.length;j++){       // ç»˜åˆ¶æœ€çŸ­è·¯å¾„
                  drawMove1(zdPath[j][0],zdPath[j][1]);
             }
             control = true;
@@ -255,15 +255,15 @@
             if(Stop)return;
             var x = currentXY[0];
             var y = currentXY[1];
-            var oxy = [currentXY[0],currentXY[1]]; // Ô­Ê¼Î»ÖÃ
+            var oxy = [currentXY[0],currentXY[1]]; // åŸå§‹ä½ç½®
             var wayout = 0;  
             if(md[x+1][y]==0){ wayout++;pathNode.push([x+1,y]); }
             if(md[x-1][y]==0){ wayout++;pathNode.push([x-1,y]); }
             if(md[x][y+1]==0){ wayout++;pathNode.push([x,y+1]); }
             if(md[x][y-1]==0){ wayout++;pathNode.push([x,y-1]); }
 
-            var htmlStr = "Ì½Ë÷½ø¶È?"+Math.round(walk/region*100) + "%";
-            htmlStr += "<br><br> µ±Ç°Â·¾¶: "+pathList.length;
+            var htmlStr = "æ¢ç´¢è¿›åº¦?"+Math.round(walk/region*100) + "%";
+            htmlStr += "<br><br> å½“å‰è·¯å¾„: "+pathList.length;
             document.getElementById("autoOut").innerHTML = htmlStr;
             document.getElementById("XY").innerHTML = "x: "+currentXY[0]+"&emsp;y: "+currentXY[1];
             document.getElementById("goNum").innerHTML = goNums;
@@ -283,7 +283,7 @@
                 setTimeout(function(){autoFx()},timeout);               
             };
 
-            if(x>=md[0].length-2 && y>=md.length-2){ // ÃÔ¹¬³ö¿Ú
+            if(x>=md[0].length-2 && y>=md.length-2){ // è¿·å®«å‡ºå£
                 var ppi = pathOkList.length;
                 pathOkList[ppi]=[];
                 for(var i=0;i<pathList.length;i++){
